@@ -50,7 +50,11 @@ export const getMyDetails=(req,res)=>{
 }
 
 export const logoutFunc=(req,res)=>{
-    res.status(200).cookie("token","",{expires:new Date(Date.now())}).json({
+    res.status(200).cookie("token","",{
+        expires:new Date(Date.now()),
+        sameSite:process.env.NODE_ENV==="dev"?"lax":"none",
+        secure:process.env.NODE_ENV==="dev"?false:true,
+    }).json({
         success:true,
         message:"Logged out successfully"
     })
