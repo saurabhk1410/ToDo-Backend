@@ -1,29 +1,16 @@
 import express from "express"
 import userCollection from "../models/user.js";
-import { addNewUser, getAllUsers, getUserByParamsId } from "../controllers/user.js";
+import { getMyDetails, loginFunc, logoutFunc, register } from "../controllers/user.js";
+import { isAuthenticated } from "../middlewares/auth.js";
 
 const router=express.Router();
 
-router.get("/all",getAllUsers)
+router.post("/new",register);
 
-// router.get("/userId",async(req,res)=>{
-//     const {id}=req.query;
-//     const user=await userCollection.findById(id);
-//     res.json({
-//         success:true,
-//         user
-//     })
-// })
+router.post("/login",loginFunc);
 
-router.post("/new",addNewUser)
+router.get("/logout",isAuthenticated,logoutFunc);
 
-router.get("/:id",getUserByParamsId)
-
-// router
-// .route("/users/:id")
-// .get(getFunc)
-// .post(postFunc)
-// .put(putFunc)
-// .delete(deleteFunc)
+router.get("/me",isAuthenticated,getMyDetails);
 
 export default router;
