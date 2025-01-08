@@ -18,7 +18,8 @@ app.use("/tasks",taskRouter);
 app.use(cors({
     credentials:true,
     methods:["GET","PUT","POST","DELETE"],
-    origin:[process.env.FRONTEND_URL]
+    // origin:[process.env.FRONTEND_URL],
+    origin:"*"
 }));
 
 app.get("/",(req,res)=>{
