@@ -16,11 +16,11 @@ app.use(cookieParser());
 app.use("/users",userRouter);
 app.use("/tasks",taskRouter);
 app.use(cors({
+    origin:"*",
     credentials:true,
     methods:["GET","PUT","POST","DELETE"],
-    // origin:[process.env.FRONTEND_URL],
-    origin:"*"
 }));
+// origin:[process.env.FRONTEND_URL],
 
 app.get("/",(req,res)=>{
     res.send("working..");
